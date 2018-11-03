@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">AndroidUIandLoginZerega</string>
+    <string name="log_in">Log In/Sign Up</string>
+    <string name="email_address">Email or ID</string>
+    <string name="login_button">LOGIN</string>
+    <string name="signup_button">Sign Up</string>
+    <string name="password">Password</string>
+    <string name="firstName">First Name</string>
+    <string name="lastName">Last Name</string>
+    <string name="birthday">Birthday</string>
+    <string name="phoneNumber">Phone Number</string>
+    <string name="userName">User Name</string>
+    <string name="confirm">Confirm</string>
+    <string name="viewAllUsers">View All Users</string>
+</resources>
