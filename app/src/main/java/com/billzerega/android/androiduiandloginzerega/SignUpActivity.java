@@ -3,6 +3,7 @@ package com.billzerega.android.androiduiandloginzerega;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,8 +56,9 @@ public class SignUpActivity extends AppCompatActivity {
                 String email = mEmail.getText().toString();
                 String password = mCreatePassword.getText().toString();
 
-                UserProfile newUserProfile = new UserProfile(firstName, lastName, birthday, userName, phoneNumber,
+                UserProfile newUserProfile = new UserProfile(firstName, lastName,  userName, birthday, phoneNumber,
                                                             email, password);
+                Log.d("inersting into database", newUserProfile.toString());
                 database.insert(newUserProfile);
 
 

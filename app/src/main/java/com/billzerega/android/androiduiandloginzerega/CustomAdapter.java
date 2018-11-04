@@ -1,19 +1,24 @@
 package com.billzerega.android.androiduiandloginzerega;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-class CustomAdapter extends ArrayAdapter<String> {
-    public CustomAdapter(Context context, int resource) {
-        super(context, resource);
+import com.billzerega.android.androiduiandloginzerega.model.entity.entity.UserProfile;
+
+import java.util.List;
+
+class CustomAdapter extends ArrayAdapter {
+    public CustomAdapter(Context context, int resource, List objects) {
+        super(context, resource, objects);
     }
 
 
-
+    @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -24,19 +29,25 @@ class CustomAdapter extends ArrayAdapter<String> {
 
         }
 
+        //grabbing the user profile for each position
+        UserProfile userProfile = (UserProfile) getItem(position);
+
+        //grabbing the 3 fields in the custom row, and then filling them with the info from hte userProfile
+        TextView userNameTextView = (TextView) listItemView.findViewById(R.id.userNameView);
+
+        userNameTextView.setText(userProfile.getUserName());
+
+        TextView firstNameTextView = (TextView) listItemView.findViewById(R.id.userFirstNameText);
+
+        firstNameTextView.setText(userProfile.getFirstName());
+
+        TextView emailTextView = (TextView) listItemView.findViewById(R.id.userEmailText);
+
+        emailTextView.setText(userProfile.getEmail());
 
 
-        LayoutInflater userInflater = LayoutInflater.from(getContext());
 
-        View customView = userInflater.inflate(R.layout.custom_row, parent, false);
 
-        String singleuser = getItem(position);
-        TextView userNameText = (TextView) customView.findViewById(R.id.userNameView);
-        TextView userFirstNameText = (TextView) customView.findViewById(R.id.userFirstNameText);
-
-        userNameText.setText(singleuser);
-        userFirstNameText.setText(singleuser);
-
-        return customView;
+        return listItemView;
     }
 }

@@ -3,19 +3,22 @@ package com.billzerega.android.androiduiandloginzerega.model.entity.dao;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.billzerega.android.androiduiandloginzerega.model.entity.entity.UserProfile;
 
 public class DatabaseAccess extends SQLiteOpenHelper {
-    public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "zeregaLoginUI.db";
+    public static final int DATABASE_VERSION = 2;
+    public static final String DATABASE_NAME = "userprofile.db";
 
     public DatabaseAccess(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        Log.d("DatabaseAccess", "context constructor");
     }
 
     public DatabaseAccess(Context context, String name, SQLiteDatabase.CursorFactory factory, int version){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        Log.d("DatabaseAccess", "multi parameter constructor");
     }
 
     @Override

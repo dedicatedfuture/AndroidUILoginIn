@@ -7,17 +7,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.billzerega.android.androiduiandloginzerega.model.entity.dao.UserProfilePersistence;
+import com.billzerega.android.androiduiandloginzerega.model.entity.entity.UserProfile;
 
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private Button mlogInButton;
     private Button mSignUpButton;
     private TextView mUserName;
     private TextView mPassword;
-    private UserProfilePersistence database = new UserProfilePersistence(this);
+    private UserProfilePersistence database;
+    ArrayList<UserProfile> userProfiles;
 
 
 
@@ -34,19 +39,36 @@ public class MainActivity extends AppCompatActivity {
         mlogInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent logInIntent = new Intent(MainActivity.this, LoginSuccessActivity.class);
 
+                database = new UserProfilePersistence(MainActivity.this);
+                userProfiles = database.getDataFromDB();
 
+                if(userProfiles.size() > 0){
+                    //cycle through all of the users
+                    for(UserProfile userP : userProfiles){
+                        //check if entered username and password match to any in database
+                        if((userP.getUserName().equals(mUserName.getText().toString())) &&
+                                userP.getPassword().equals(mPassword.getText().toString())){
+                            //if they do match pass to the log in success activity
 
+                            Intent logInIntent = new Intent(MainActivity.this, LoginSuccessActivity.class);
 
-                String userFirstName = (String) "bill" ;//call to database ;
-                String userLastName = (String) "z";//call to database;
+                            String userFirstName = (String) userP.getFirstName();
+                            String userLastName = (String) userP.getLastName();
 
-                logInIntent.putExtra("firstName", userFirstName);
-                logInIntent.putExtra("lastName", userLastName);
+                            logInIntent.putExtra("firstName", userFirstName);
+                            logInIntent.putExtra("lastName", userLastName);
 
-                MainActivity.this.startActivity(logInIntent);
+                            MainActivity.this.startActivity(logInIntent);
 
+                        }else{
+                            Toast.makeText(MainActivity.this, "Invalid username and/or password",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }else{
+                    Toast.makeText(MainActivity.this, "Create a new account", Toast.LENGTH_LONG).show();
+                }
 
             }
         });
