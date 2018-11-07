@@ -22,7 +22,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText mPhoneNumber;
     private EditText mEmail;
     private EditText mCreatePassword;
-    private  UserProfilePersistence database = new UserProfilePersistence(this);
+    private  UserProfilePersistence database;
 
 
     @Override
@@ -46,7 +46,7 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //add users profile to the database
 
-
+                database  = new UserProfilePersistence(SignUpActivity.this);
 
                 String firstName = mFirstName.getText().toString();
                 String lastName = mLastName.getText().toString();
@@ -58,7 +58,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 UserProfile newUserProfile = new UserProfile(firstName, lastName,  userName, birthday, phoneNumber,
                                                             email, password);
-                Log.d("inersting into database", newUserProfile.toString());
+                Log.d("inserting into database", newUserProfile.toString());
                 database.insert(newUserProfile);
 
 

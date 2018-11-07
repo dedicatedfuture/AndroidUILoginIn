@@ -33,6 +33,7 @@ public class ViewAllUsersActivity extends AppCompatActivity {
         UserProfilePersistence userProfilePersistence = new UserProfilePersistence(this);
 
         userProfiles = userProfilePersistence.getDataFromDB();
+
         Toast.makeText(ViewAllUsersActivity.this, "Users in DB: " + userProfiles.size(),
                 Toast.LENGTH_LONG).show();;
         userAdapter = new CustomAdapter(this, R.layout.custom_row, userProfiles);

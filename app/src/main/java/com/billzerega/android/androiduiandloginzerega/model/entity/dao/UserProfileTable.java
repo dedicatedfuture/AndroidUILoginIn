@@ -17,11 +17,11 @@ public class UserProfileTable {
     //Defining the Table content
     public static final String TABLE_NAME = "userprofile";
     public static final String COLUMN_NAME_ID = "id";
-    public static final String COLUMN_NAME_FIRSTNAME = "first name";
-    public static final String COLUMN_NAME_LASTNAME = "last name";
-    public static final String COLUMN_NAME_USERNAME = "user name";
+    public static final String COLUMN_NAME_FIRSTNAME = "firstname";
+    public static final String COLUMN_NAME_LASTNAME = "lastname";
+    public static final String COLUMN_NAME_USERNAME = "username";
     public static final String COLUMN_NAME_BIRTHDAY = "birthday";
-    public static final String COLUMN_NAME_PHONENUMBER = "phone number";
+    public static final String COLUMN_NAME_PHONENUMBER = "phonenumber";
     public static final String COLUMN_NAME_EMAIL = "email";
     public static final String COLUMN_NAME_PASSWORD = "password";
 

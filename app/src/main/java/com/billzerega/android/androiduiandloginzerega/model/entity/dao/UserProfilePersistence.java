@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.billzerega.android.androiduiandloginzerega.model.entity.entity.UserProfile;
 
@@ -26,6 +27,7 @@ public class UserProfilePersistence implements IPersistence{
 
         //The ContentValues object create a map of valuse, where the columns are the keys
         ContentValues contentValues = new ContentValues();
+
         contentValues.put(UserProfileTable.COLUMN_NAME_FIRSTNAME, userProfile.getFirstName());
         contentValues.put(UserProfileTable.COLUMN_NAME_LASTNAME, userProfile.getLastName());
         contentValues.put(UserProfileTable.COLUMN_NAME_USERNAME, userProfile.getUserName());
@@ -34,8 +36,11 @@ public class UserProfilePersistence implements IPersistence{
         contentValues.put(UserProfileTable.COLUMN_NAME_EMAIL, userProfile.getEmail());
         contentValues.put(UserProfileTable.COLUMN_NAME_PASSWORD, userProfile.getPassword());
 
+        Log.d("content values", "content values " + contentValues.toString());
+
         //Insert the ContentValues into the UserProfile table
         sqLiteDatabase.insert(UserProfileTable.TABLE_NAME, null, contentValues);
+        Log.d("database after insert", "database values: " + sqLiteDatabase.toString());
 
         sqLiteDatabase.close();
     }
@@ -70,6 +75,8 @@ public class UserProfilePersistence implements IPersistence{
 
         //Gather all the records found for the UserProfile table
         Cursor cursor = sqLiteDatabase.rawQuery(UserProfileTable.select(), null);
+        Log.d("cursor", cursor.toString());
+
 
         //it will iterate since the first record gathered from the database
         cursor.moveToFirst();
@@ -78,10 +85,6 @@ public class UserProfilePersistence implements IPersistence{
         userProfiles = new ArrayList<>();
 
         if(cursor !=null && cursor.moveToFirst()){
-
-
-
-
             do{
                 String firstName = cursor.getString(cursor.getColumnIndex(UserProfileTable.COLUMN_NAME_FIRSTNAME));
                 String lastName = cursor.getString(cursor.getColumnIndex(UserProfileTable.COLUMN_NAME_LASTNAME));
@@ -90,6 +93,11 @@ public class UserProfilePersistence implements IPersistence{
                 String phoneNumber = cursor.getString(cursor.getColumnIndex(UserProfileTable.COLUMN_NAME_PHONENUMBER));
                 String email = cursor.getString(cursor.getColumnIndex(UserProfileTable.COLUMN_NAME_EMAIL));
                 String password = cursor.getString(cursor.getColumnIndex(UserProfileTable.COLUMN_NAME_PASSWORD));
+
+                UserProfile userProfile = new UserProfile(firstName, lastName, userName, birthday,
+                        phoneNumber, email,password);
+
+                userProfiles.add(userProfile);
             } while(cursor.moveToNext());
         }
         return userProfiles;
