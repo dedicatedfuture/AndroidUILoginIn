@@ -1,6 +1,7 @@
 package com.billzerega.android.androiduiandloginzerega;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,11 @@ import android.widget.Toast;
 
 import com.billzerega.android.androiduiandloginzerega.model.entity.dao.UserProfilePersistence;
 import com.billzerega.android.androiduiandloginzerega.model.entity.entity.UserProfile;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SignUpActivity extends AppCompatActivity {
     private Button mConfirm;
@@ -23,6 +29,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText mEmail;
     private EditText mCreatePassword;
     private  UserProfilePersistence database;
+    private FirebaseAuth mAuth;
 
 
     @Override
@@ -38,6 +45,8 @@ public class SignUpActivity extends AppCompatActivity {
         mPhoneNumber = (EditText) findViewById(R.id.phoneNumber);
         mEmail = (EditText) findViewById(R.id.email);
         mCreatePassword = (EditText) findViewById(R.id.createPassword);
+
+        mAuth = FirebaseAuth.getInstance();
 
 
 
@@ -58,9 +67,11 @@ public class SignUpActivity extends AppCompatActivity {
 
                 UserProfile newUserProfile = new UserProfile(firstName, lastName,  userName, birthday, phoneNumber,
                                                             email, password);
+
+                createAccount(newUserProfile.getEmail(), newUserProfile.getPassword());
+
                 Log.d("inserting into database", newUserProfile.toString());
                 database.insert(newUserProfile);
-
 
 
 
@@ -83,5 +94,28 @@ public class SignUpActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void createAccount(String email, String password){
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("firebase create email", "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("firebase email fail", "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(SignUpActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+
+                        }
+
+                        // ...
+                    }
+                });
     }
 }

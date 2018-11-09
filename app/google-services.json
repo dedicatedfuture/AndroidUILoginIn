@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "16969413066",
+    "firebase_url": "https://androiduiandloginzerega.firebaseio.com",
+    "project_id": "androiduiandloginzerega",
+    "storage_bucket": "androiduiandloginzerega.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:16969413066:android:af6f5a63169a1743",
+        "android_client_info": {
+          "package_name": "com.billzerega.android.androiduiandloginzerega"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "16969413066-29gpam4pjrpm58robrvv6j7dvsgvinqe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.billzerega.android.androiduiandloginzerega",
+            "certificate_hash": "61ddb4bf05c1f277ee466a5f21aa9dc95ba2a66a"
+          }
+        },
+        {
+          "client_id": "16969413066-t0t08aljqp37rr4n86hkbt2ete8ovs9b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMsT4BR_eWu0egTXQHZu7Rta3u87PGaug"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "16969413066-t0t08aljqp37rr4n86hkbt2ete8ovs9b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
